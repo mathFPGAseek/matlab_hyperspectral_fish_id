@@ -208,28 +208,34 @@ end % debug skip train
    
    for i = 1:num_files
      disp(['  ',num2str(i), '/', num2str(num_files), '...'])
-     file_tmp = strsplit(input_files_shuffled{i},'.');
-      
+     file_tmp = strsplit(input_files_shuffled{i},'.');     
         
-            tmp_input_file_fl = fullfile(input_directory_fl, file_tmp{1});    
-            tmp_input_file2_fl = strcat(tmp_input_file_fl, '.',file_tmp{2});    
-            [data_fl]   = extract_csv_data(tmp_input_file2_fl);
+            tmp_input_file = fullfile(input_directory, file_tmp{1});    
+            tmp_input_file2 = strcat(tmp_input_file, '.',file_tmp{2});    
+            [data_spec]   = extract_csv_data(tmp_input_file2);
+            
+            %tmp_input_file_fl = fullfile(input_directory_fl, file_tmp{1});    
+            %tmp_input_file2_fl = strcat(tmp_input_file_fl, '.',file_tmp{2});    
+            %[data_fl]   = extract_csv_data(tmp_input_file2_fl);
         
-            tmp_input_file_ir = fullfile(input_directory_ir, file_tmp{1});    
-            tmp_input_file2_ir = strcat(tmp_input_file_ir, '.',file_tmp{2});    
-            [data_ir]   = extract_csv_data(tmp_input_file2_ir);
+            %tmp_input_file_ir = fullfile(input_directory_ir, file_tmp{1});    
+            %tmp_input_file2_ir = strcat(tmp_input_file_ir, '.',file_tmp{2});    
+            %[data_ir]   = extract_csv_data(tmp_input_file2_ir);
         
-            tmp_input_file_vs = fullfile(input_directory_vs, file_tmp{1});    
-            tmp_input_file2_vs = strcat(tmp_input_file_vs, '.',file_tmp{2});    
-            [data_vs]   = extract_csv_data(tmp_input_file2_vs);
+            %tmp_input_file_vs = fullfile(input_directory_vs, file_tmp{1});    
+            %tmp_input_file2_vs = strcat(tmp_input_file_vs, '.',file_tmp{2});    
+            %[data_vs]   = extract_csv_data(tmp_input_file2_vs);
         
             % Find length of rows
-            fl_row_size = size(data_fl);
-            fl_row_size = fl_row_size(1);
-            ir_row_size = size(data_ir);
-            ir_row_size = ir_row_size (1);
-            vs_row_size = size(data_vs);
-            vs_row_size = vs_row_size(1);
+            data_row_size = size(data_spec);
+            data_row_size = data_row_size(1);
+            
+            %fl_row_size = size(data_fl);
+            %fl_row_size = fl_row_size(1);
+            %ir_row_size = size(data_ir);
+            %ir_row_size = ir_row_size (1);
+            %vs_row_size = size(data_vs);
+            %vs_row_size = vs_row_size(1);
         
             rng_index = 0;
             random_temp_array        = {};
@@ -237,40 +243,43 @@ end % debug skip train
             random_temp_array_label  = {};
         
             % Find length of cols % This is our feature size
-            fl_col_size = size(data_fl);
-            fl_col_size = fl_col_size(2);
-            ir_col_size = size(data_ir);
-            ir_col_size = ir_col_size (2);
-            vs_col_size = size(data_vs);
-            vs_col_size = vs_col_size(2);
+            data_col_size = size(data_spec);
+            data_col_size = data_col_size(2);
+            
+            %fl_col_size = size(data_fl);
+            %fl_col_size = fl_col_size(2);
+            %ir_col_size = size(data_ir);
+            %ir_col_size = ir_col_size (2);
+            %vs_col_size = size(data_vs);
+            %vs_col_size = vs_col_size(2);
         
-            feature_random_mix_size = fl_col_size + ir_col_size + vs_col_size;
+            feature_random_mix_size = data_col_size;
+            %feature_random_mix_size = fl_col_size + ir_col_size + vs_col_size;
         
 
             for i2 = 1 : num_random_test_vectors_per_fish
                  % Shuffle rows of matrices
                  rng(rng_index);
-                 random_fl = data_fl(randperm(size(data_fl, 1)), :);
-                 rng(rng_index);
-                 random_ir = data_ir(randperm(size(data_ir, 1)), :);
-                 rng(rng_index);
-                 random_vs = data_vs(randperm(size(data_vs, 1)), :);
+                 random_data = data_spec(randperm(size(data_spec, 1)), :);
+                 %rng(rng_index);
+                 %random_fl = data_fl(randperm(size(data_fl, 1)), :);
+                 %rng(rng_index);
+                 %random_ir = data_ir(randperm(size(data_ir, 1)), :);
+                 %rng(rng_index);
+                 %random_vs = data_vs(randperm(size(data_vs, 1)), :);
                  % Build vector for this randomization
                  for i1 = 1 : size_of_random_test_vectors
-                   random_temp_array_fl = random_fl(i1,:);
-                   random_temp_array_ir = random_ir(i1,:);
-                   random_temp_array_vs = random_vs(i1,:);
-                   %random_temp_array_trans{end+1} = random_temp_array';
-                   %random_temp_array       = {};
-                   random_temp_array = [ random_temp_array_fl random_temp_array_ir random_temp_array_vs];
-                   %random_temp_array = [ random_temp_array_fl; random_temp_array_ir; random_temp_array_vs;];
-                   %random_temp_array_trans{end+1} = random_temp_array';
+                   random_temp_array_data = random_data(i1,:);
+                   %random_temp_array_fl = random_fl(i1,:);
+                   %random_temp_array_ir = random_ir(i1,:);
+                   %random_temp_array_vs = random_vs(i1,:);
+                   random_temp_array = random_temp_array_data;
+                   %random_temp_array = [ random_temp_array_fl random_temp_array_ir random_temp_array_vs];
                    input_classify_data{end+1} = random_temp_array';
                  end
                  label = M(file_tmp{1});
      
                  for j = 1 : size_of_random_test_vectors
-                    %random_temp_array_label{end+1} = label;
                     input_classify_label{end+1} = label;
                  end 
                  rng_index = rng_index + 1;
