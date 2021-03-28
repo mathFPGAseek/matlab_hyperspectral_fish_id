@@ -1,5 +1,5 @@
 %--------------------------------------------------------------------
-% file_name: reduce_classify_exp_2B.m
+% file_name: lstm_fusion_classifier.m
 % author: rbd
 % initial data: 10/6/20
 % School/class: Univ of North Dakota /Fall 2020 EE999
