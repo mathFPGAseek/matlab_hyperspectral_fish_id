@@ -1,13 +1,13 @@
 %--------------------------------------------------------------------
 % file_name: lstm_single_classifier.m
 % author: rbd
-% initial data: 328/20
+% initial data: 3/28/21
 % School/class: Univ of North Dakota /Fall 2020 EE999
 % Advisors: Dr. Vasefi, Dr. Tavakolian, Dr. Akhbardeh
 % Project: Fish ID
 % Grant: NOAA
 % Description: Classify by select number of fish; No fusion
-% 
+% .
 %--------------------------------------------------------------------
 function [done,total_accuracy,ConfusMat] = lstm_single_classifier(mode,rand_seed ...
                                            ,cell_fish_train_directory ...

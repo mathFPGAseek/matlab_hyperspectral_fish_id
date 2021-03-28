@@ -2,7 +2,7 @@
 % filename: test_w_tables_example_script_ltsm_fusion.m
 % author: rbd
 % 3/20/21 
-% descr: Classify with LSTM Neural Net.
+% descr: Classify with LSTM Neural Net
 %---------------------------------------------------------------------
 % Define input  train data.
 cell_fish_train_directory = {'../All_FL/FL_Train',...
