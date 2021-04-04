@@ -19,10 +19,10 @@ done = 0;
 
 
 %num_random_train_vectors_per_fish = 40;
-size_of_random_train_vectors      = 100;
+size_of_random_train_vectors      = 50;
 
 %num_random_test_vectors_per_fish = 10;
-size_of_random_test_vectors      = 100;
+size_of_random_test_vectors      = 50;
 
 input_files = {};
 

@@ -16,13 +16,13 @@ cell_fish_train_directory = {'../All_FL/FL_Train',...
 %% Process Parameters 
 %------------------------
 fusion = 0; % Single: fusion = 0; Multi: fusion = 1;
-mode   = 1; % FL = 1; SWIR = 2; VS-NIR = 3; Fusion = 3( used for testing)
+mode   = 3; % FL = 1; SWIR = 2; VS-NIR = 3; Fusion = 3( used for testing)
 
 window_dim = 10; % 10x10 window for outliers
 Experiments = 1;
 %define_all_table_package;
-num_random_train_vectors_per_fish = 40; % use x100 random samples
-num_random_test_vectors_per_fish = 10;  % use x100 random samples
+num_random_train_vectors_per_fish = 80; % use x100 random samples
+num_random_test_vectors_per_fish = 20;  % use x100 random samples
 
 
 %^^^^^^^^^^^^^^^^^^^^^^
