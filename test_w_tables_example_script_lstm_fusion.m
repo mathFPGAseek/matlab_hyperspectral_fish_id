@@ -21,8 +21,8 @@ mode   = 3; % FL = 1; SWIR = 2; VS-NIR = 3; Fusion = 3( used for testing)
 window_dim = 10; % 10x10 window for outliers
 Experiments = 1;
 %define_all_table_package;
-num_random_train_vectors_per_fish = 80; % use x100 random samples
-num_random_test_vectors_per_fish = 20;  % use x100 random samples
+num_random_train_vectors_per_fish = 5; % use x100 random samples
+num_random_test_vectors_per_fish = 2;  % use x100 random samples
 
 
 %^^^^^^^^^^^^^^^^^^^^^^
