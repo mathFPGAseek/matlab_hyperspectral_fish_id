@@ -15,7 +15,7 @@ cell_fish_train_directory = {'../All_FL/FL_Train',...
 %------------------------
 %% Process Parameters 
 %------------------------
-fusion = 1; % Single: fusion = 0; Multi: fusion = 1;
+fusion = 0; % Single: fusion = 0; Multi: fusion = 1;
 mode   = 3; % FL = 1; SWIR = 2; VS-NIR = 3; Fusion = 3( used for testing)
 
 window_dim = 10; % 10x10 window for outliers
