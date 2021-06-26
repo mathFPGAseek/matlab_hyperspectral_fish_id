@@ -12,9 +12,11 @@
 function [done,total_accuracy,ConfusMat] = lstm_single_classifier(mode,rand_seed ...
                                            ,cell_fish_train_directory ...
                                            ,cell_fish_test_directory ...
+                                           ,cell_fish_loc_directory ...
                                            ,num_fish,M,show_confusion ...
                                            ,num_random_train_vectors_per_fish ...
-                                           ,num_random_test_vectors_per_fish )
+                                           ,num_random_test_vectors_per_fish ...
+                                           ,flag_loc )
 done = 0;
 
 
@@ -42,7 +44,7 @@ num_files = num_fish
    [input_files_shuffled] = rand_input_files(input_files,rand_seed);  
 
    % DEBUG TEMPORARY!!
-TRAIN = 1;
+TRAIN = 0;
 if TRAIN
 %%--------------------------------------
 %% Training 
@@ -201,9 +203,14 @@ end % debug skip train
     input_classify_data  = {};
     input_classify_label = {};
     
+    input_classify_loc_data  = {};
+    
     disp(' Begin input of CSV files for Testing of Classification...')
 
     input_directory = cell_fish_test_directory{mode};
+    if flag_loc == 1
+        input_loc_directory = cell_fish_loc_directory{mode};
+    end
     
    
    for i = 1:num_files
@@ -213,6 +220,12 @@ end % debug skip train
             tmp_input_file = fullfile(input_directory, file_tmp{1});    
             tmp_input_file2 = strcat(tmp_input_file, '.',file_tmp{2});    
             [data_spec]   = extract_csv_data(tmp_input_file2);
+            
+            if flag_loc == 1
+                tmp_input_loc_file = fullfile(input_loc_directory, file_tmp{1});    
+                tmp_input_loc_file2 = strcat(tmp_input_loc_file, '.',file_tmp{2});    
+                [data_loc_spec]   = extract_csv_data(tmp_input_loc_file2);         
+            end
             
             %tmp_input_file_fl = fullfile(input_directory_fl, file_tmp{1});    
             %tmp_input_file2_fl = strcat(tmp_input_file_fl, '.',file_tmp{2});    
@@ -261,6 +274,11 @@ end % debug skip train
                  % Shuffle rows of matrices
                  rng(rng_index);
                  random_data = data_spec(randperm(size(data_spec, 1)), :);
+                 
+                 if flag_loc == 1
+                    random_loc_data = data_loc_spec(randperm(size(data_loc_spec, 1)), :); 
+                 end
+                     
                  %rng(rng_index);
                  %random_fl = data_fl(randperm(size(data_fl, 1)), :);
                  %rng(rng_index);
@@ -276,6 +294,12 @@ end % debug skip train
                    random_temp_array = random_temp_array_data;
                    %random_temp_array = [ random_temp_array_fl random_temp_array_ir random_temp_array_vs];
                    input_classify_data{end+1} = random_temp_array';
+                   
+                   if flag_loc == 1
+                       random_temp_array_loc_data = random_loc_data(i1,:);
+                       random_temp_loc_array = random_temp_array_loc_data;                     
+                       input_classify_loc_data{end+1} = random_temp_loc_array';
+                   end
                  end
                  label = M(file_tmp{1});
      
@@ -291,6 +315,10 @@ end % debug skip train
      
    % randomize data and labels
    [rand_data, rand_label] = rand_data_label(input_classify_data,input_classify_label);  
+    if flag_loc == 1
+      [rand_loc_data, rand_dummy_label] = rand_data_label(input_classify_loc_data,input_classify_label); 
+    end
+        
    rand_label_array        = cell2mat(rand_label);
    
    cell_data_label         = rand_data;

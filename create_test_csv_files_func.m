@@ -6,8 +6,8 @@
 % descr: extract from table to generate csv files.
 %---------------------------------------------------------------------
 function [ done] = create_test_csv_files_func(T,...
-                   dir_data_file,dir_count_file,count_file_name,...
-                   B,spectra_low_col,spectra_high_col,norm)
+                   dir_data_file,dir_loc_file,dir_count_file,count_file_name,...
+                   B,spectra_low_col,spectra_high_col,norm,flag_loc)
                
 done = 0;
 
@@ -19,6 +19,7 @@ T_cell = table2cell(T);
 
 % Constant Strings
 output_ae_test_directory =  dir_data_file;
+output_ae_test_loc_directory =  dir_loc_file;
 output_ae_test_count     =  dir_count_file;
 vs_test_count            =  count_file_name;
 
@@ -42,6 +43,9 @@ len_species = len_species(2);
 temp_cell_matrix = {}; % temporary copy of one sample
 temp_matrix = [];
 temp_acc_matrix = [];
+temp_cell_loc_matrix = {}; % temporary copy of one sample
+temp_loc_matrix = [];
+temp_acc_loc_matrix = [];
 count = 0;
 
 Count_for_species = zeros(1,len_species);
@@ -83,6 +87,14 @@ for i = 1 : len_species
             temp_matrix = [temp_cell_matrix{:}];
             temp_acc_matrix = cat(1,temp_acc_matrix,temp_matrix);
             temp_cell_matrix = {};
+            if flag_loc == 1
+              for k = spectra_high_col+1 : spectra_high_col+2 % For VIS
+                temp_cell_loc_matrix{end + 1} = T_cell{j,k};
+              end
+              temp_loc_matrix = [temp_cell_loc_matrix{:}];
+              temp_acc_loc_matrix = cat(1,temp_acc_loc_matrix,temp_loc_matrix);
+              temp_cell_loc_matrix = {};
+            end
         end
     end
     %toc
@@ -95,6 +107,10 @@ for i = 1 : len_species
     temp_acc_matrix = [];
     Count_for_species(i) = count;
     count = 0;
+    if flag_loc == 1
+        save_ae_in_data(output_ae_test_loc_directory,B{i},temp_acc_loc_matrix)
+        temp_acc_loc_matrix = [];
+    end
 end
 % Write counts for each species 
 save_ae_in_data(output_ae_test_count,vs_test_count,Count_for_species)
