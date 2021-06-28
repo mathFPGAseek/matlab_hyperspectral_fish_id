@@ -7,7 +7,7 @@
 % Project: Fish ID
 % Grant: NOAA
 % Description: Classify by select number of fish; No fusion
-% 
+% .
 %--------------------------------------------------------------------
 function [done,total_accuracy,ConfusMat] = lstm_single_classifier(mode,rand_seed ...
                                            ,cell_fish_train_directory ...
@@ -44,7 +44,7 @@ num_files = num_fish
    [input_files_shuffled] = rand_input_files(input_files,rand_seed);  
 
    % DEBUG TEMPORARY!!
-TRAIN = 0;
+TRAIN = 1;
 if TRAIN
 %%--------------------------------------
 %% Training 
