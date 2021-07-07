@@ -199,7 +199,8 @@ end % debug skip train
 %%--------------------------------------
 %% Testing
 %%--------------------------------------
-
+DEBUG = 1;
+if DEBUG
     input_classify_data  = {};
     input_classify_label = {};
     
@@ -297,7 +298,7 @@ end % debug skip train
                    
                    if flag_loc == 1
                        random_temp_array_loc_data = random_loc_data(i1,:);
-                       random_temp_loc_array = random_temp_array_loc_data;                     
+                       random_temp_loc_array = [num2cell(random_temp_array_loc_data) file_tmp{1}];                     
                        input_classify_loc_data{end+1} = random_temp_loc_array';
                    end
                  end
@@ -326,9 +327,14 @@ end % debug skip train
    category_rand_label     = categorical(rand_label_array);
    YTest                   = category_rand_label';
    
+   cell_location_label     = rand_loc_data;
+   XYLocTest               = cell_location_label';
+   
    debug = 1;
 
    miniBatchSize = 27;
+   
+
   
    debug = 1;
 
@@ -344,7 +350,30 @@ end % debug skip train
    
    total_accuracy(num_files) = acc;
    
+   % Correlate location data
 
+%{
+   if YPred == YTest
+       XYLocResultsTest = [XYLocTest num2cell(1)];
+   else
+        XYLocResultsTest = [XYLocTest num2cell(0)];
+   end
+%}
+   
+end % end debug skip code
+
+XYLocResultsTest = {};
+temp_XYLocTest   = {};
+for i = 1 : 51000
+    if YPred(i) == YTest(i)
+        temp_XYLocTest = XYLocTest(i);
+        XYLocResultsTest{end+1} = [temp_XYLocTest '1']; % X,Y,Sample, Pass/Fail
+    else
+        temp_XYLocTest = XYLocTest(i);
+        XYLocResultsTest{end+1} = [temp_XYLocTest '0'];
+    end
+end
+        
 
 debug = 1;
 done = 1;
@@ -354,6 +383,8 @@ if show_confusion == 1
     cm = confusionchart(YTest,YPred);
  
 end 
+
+debug = 1;
 
 %%--------------------------------------
 %% Functions

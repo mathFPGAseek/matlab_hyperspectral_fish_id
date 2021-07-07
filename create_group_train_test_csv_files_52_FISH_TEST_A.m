@@ -174,7 +174,7 @@ dir_count_file            =  '../All_VS';
 count_file_name           =  'vs_test_count';
 spectra_low_col           = 10;
 spectra_high_col          = 134;
-flag_loc                  = 0;
+flag_loc                  = 1;
 
 norm                      = 0;
 
@@ -220,7 +220,7 @@ dir_count_file            =  '../All_FL';
 count_file_name           =  'fl_test_count';
 spectra_low_col           = 10;
 spectra_high_col          = 69;
-flag_loc                  = 0;
+flag_loc                  = 1;
 
 norm                      = 1;
 
