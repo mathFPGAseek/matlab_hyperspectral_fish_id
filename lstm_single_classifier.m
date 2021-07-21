@@ -277,6 +277,7 @@ if DEBUG
                  random_data = data_spec(randperm(size(data_spec, 1)), :);
                  
                  if flag_loc == 1
+                    rng(rng_index);
                     random_loc_data = data_loc_spec(randperm(size(data_loc_spec, 1)), :); 
                  end
                      
