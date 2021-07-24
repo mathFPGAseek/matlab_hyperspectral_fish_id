@@ -188,7 +188,11 @@ end % debug skip train
     
     disp(' Begin input of CSV files for Testing of Classification...')
 
-    input_directory = cell_fish_test_directory{mode};
+    %input_directory = cell_fish_test_directory{mode};
+    
+    input_test_directory_fl = cell_fish_test_directory{1}; % FL
+    input_test_directory_ir = cell_fish_test_directory{2}; % IR
+    input_test_directory_vs = cell_fish_test_directory{3}; % VS
     
    
    for i = 1:num_files
@@ -196,15 +200,15 @@ end % debug skip train
      file_tmp = strsplit(input_files_shuffled{i},'.');
       
         
-            tmp_input_file_fl = fullfile(input_directory_fl, file_tmp{1});    
+            tmp_input_file_fl = fullfile(input_test_directory_fl, file_tmp{1});    
             tmp_input_file2_fl = strcat(tmp_input_file_fl, '.',file_tmp{2});    
             [data_fl]   = extract_csv_data(tmp_input_file2_fl);
         
-            tmp_input_file_ir = fullfile(input_directory_ir, file_tmp{1});    
+            tmp_input_file_ir = fullfile(input_test_directory_ir, file_tmp{1});    
             tmp_input_file2_ir = strcat(tmp_input_file_ir, '.',file_tmp{2});    
             [data_ir]   = extract_csv_data(tmp_input_file2_ir);
         
-            tmp_input_file_vs = fullfile(input_directory_vs, file_tmp{1});    
+            tmp_input_file_vs = fullfile(input_test_directory_vs, file_tmp{1});    
             tmp_input_file2_vs = strcat(tmp_input_file_vs, '.',file_tmp{2});    
             [data_vs]   = extract_csv_data(tmp_input_file2_vs);
         
@@ -302,6 +306,8 @@ if show_confusion == 1
     cm = confusionchart(YTest,YPred);
  
 end 
+
+debug = 1;
 
 %%--------------------------------------
 %% Functions

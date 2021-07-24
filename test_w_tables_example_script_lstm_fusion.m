@@ -19,7 +19,7 @@ cell_fish_loc_directory =  {'../All_FL/FL_Loc_Test',...
 %------------------------
 %% Process Parameters 
 %------------------------
-fusion = 0; % Single: fusion = 0; Multi: fusion = 1;
+fusion = 1; % Single: fusion = 0; Multi: fusion = 1;
 mode   = 2; % FL = 1; SWIR = 2; VS-NIR = 3; Fusion = 3( used for testing)
 
 flag_loc = 1; % Use location data
