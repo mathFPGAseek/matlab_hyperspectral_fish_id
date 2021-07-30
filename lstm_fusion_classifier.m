@@ -7,7 +7,7 @@
 % Project: Fish ID
 % Grant: NOAA
 % Description: Classify by select number of fish; No fusion
-% 
+% .
 %--------------------------------------------------------------------
 function [done,total_accuracy,ConfusMat] = lstm_fusion_classifier(mode,rand_seed ...
                                            ,cell_fish_train_directory ...
