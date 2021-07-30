@@ -7,12 +7,12 @@
 % Project: Fish ID
 % Grant: NOAA
 % Description: Classify by select number of fish; No fusion
-% .
+% 
 %--------------------------------------------------------------------
 function [done,total_accuracy,ConfusMat] = lstm_fusion_classifier(mode,rand_seed ...
                                            ,cell_fish_train_directory ...
                                            ,cell_fish_test_directory ...
-                                           ,num_fish,M,show_confusion ...
+                                           ,num_fish,num_classes,M,show_confusion ...
                                            ,num_random_train_vectors_per_fish ...
                                            ,num_random_test_vectors_per_fish )
 done = 0;
@@ -145,7 +145,7 @@ if TRAIN
    
    numHiddenUnits = 100;
    %numClasses = 8;
-   numClasses = num_files;
+   numClasses = num_classes;
 
    layers = [ ...
     sequenceInputLayer(inputSize)
