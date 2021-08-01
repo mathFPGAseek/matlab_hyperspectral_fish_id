@@ -72,9 +72,9 @@ C = {'USDAS135','USDAS128','USDAS142', ...
      'USDAS258','USDAS259','USDAS260', ...
      'USDAS274','USDAS275','USDAS276'}; % Note repeated 'USDAS184' & 'USDAS183'
 
- group                     =  3;
+  group                     =  3;
 
- 
+  num_classes = 51;
   num_fish = 51; 
          
   fish_value = [ 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 ...
