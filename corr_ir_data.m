@@ -1,16 +1,16 @@
 %----------------------------------------------------------------------
-% filename: corr_data.m
+% filename: corr_ir_data.m
 % author: rbd
-% date: 7-31-21
+% date: 8-1-21
 % Description: Experiments with 51 A
 %------------------
 % Good :  
 % Look nominal : Figures 1,2,3,4; { 142(1)/156(9)/051(13)/201(39)}
 %------------------
 % Potential Bad :
-% Look nominal:  Figures 5,9,15,20
-% Look mediocre: Figures 7,11,13,14,18:
-% Look poor:
+% Look nominal:  Figures 6,7,8,9,12,13,16,17,18,19,20
+% Look mediocre: Figures 5,11,14,15
+% Look poor: Figures 10
 %
 %----------------------------------------------------------------------
 close all
@@ -18,8 +18,8 @@ clear
 
 tic
 % Good Correlation
-S142Test = load('../All_FL/FL_Test/USDAS142.csv');
-S142Train = load('../All_FL/FL_Train/USDAS142.csv');
+S142Test = load('../All_IR/IR_Test/USDAS142.csv');
+S142Train = load('../All_IR/IR_Train/USDAS142.csv');
 S142 = vertcat(S142Test,S142Train);
 len = size(S142,1);
 x = 1:len;
@@ -29,8 +29,8 @@ S142 = S142';
 figure 
 surf(R142,'LineStyle','none')
 
-S156Test = load('../All_FL/FL_Test/USDAS156.csv');
-S156Train = load('../All_FL/FL_Train/USDAS156.csv');
+S156Test = load('../All_IR/IR_Test/USDAS156.csv');
+S156Train = load('../All_IR/IR_Train/USDAS156.csv');
 S156 = vertcat(S156Test,S156Train);
 len = size(S156,1);
 x = 1:len;
@@ -40,8 +40,8 @@ S156 = S156';
 figure 
 surf(R156,'LineStyle','none')
 
-S051Test = load('../All_FL/FL_Test/USDAS051.csv');
-S051Train = load('../All_FL/FL_Train/USDAS051.csv');
+S051Test = load('../All_IR/IR_Test/USDAS051.csv');
+S051Train = load('../All_IR/IR_Train/USDAS051.csv');
 S051 = vertcat(S051Test,S051Train);
 len = size(S051,1);
 x = 1:len;
@@ -51,8 +51,8 @@ S051 = S051';
 figure 
 surf(R051,'LineStyle','none')
 
-S201Test = load('../All_FL/FL_Test/USDAS201.csv');
-S201Train = load('../All_FL/FL_Train/USDAS201.csv');
+S201Test = load('../All_IR/IR_Test/USDAS201.csv');
+S201Train = load('../All_IR/IR_Train/USDAS201.csv');
 S201 = vertcat(S201Test,S201Train);
 len = size(S201,1);
 x = 1:len;
@@ -64,8 +64,8 @@ surf(R201,'LineStyle','none')
 
 
 % Possibly Bad Correlation
-S143Test = load('../All_FL/FL_Test/USDAS143.csv');
-S143Train = load('../All_FL/FL_Train/USDAS143.csv');
+S143Test = load('../All_IR/IR_Test/USDAS143.csv');
+S143Train = load('../All_IR/IR_Train/USDAS143.csv');
 S143 = vertcat(S143Test,S143Train);
 len = size(S143,1);
 x = 1:len;
@@ -75,8 +75,8 @@ S143 = S143';
 figure 
 surf(R143,'LineStyle','none')
 
-S146Test = load('../All_FL/FL_Test/USDAS146.csv');
-S146Train = load('../All_FL/FL_Train/USDAS146.csv');
+S146Test = load('../All_IR/IR_Test/USDAS146.csv');
+S146Train = load('../All_IR/IR_Train/USDAS146.csv');
 S146 = vertcat(S146Test,S146Train);
 len = size(S146,1);
 x = 1:len;
@@ -86,8 +86,8 @@ S146 = S146';
 figure 
 surf(R146,'LineStyle','none')
 
-S147Test = load('../All_FL/FL_Test/USDAS147.csv');
-S147Train = load('../All_FL/FL_Train/USDAS147.csv');
+S147Test = load('../All_IR/IR_Test/USDAS147.csv');
+S147Train = load('../All_IR/IR_Train/USDAS147.csv');
 S147 = vertcat(S147Test,S147Train);
 len = size(S147,1);
 x = 1:len;
@@ -97,8 +97,8 @@ S147 = S147';
 figure 
 surf(R147,'LineStyle','none')
 
-S053Test = load('../All_FL/FL_Test/USDAS053.csv');
-S053Train = load('../All_FL/FL_Train/USDAS053.csv');
+S053Test = load('../All_IR/IR_Test/USDAS053.csv');
+S053Train = load('../All_IR/IR_Train/USDAS053.csv');
 S053 = vertcat(S053Test,S053Train);
 len = size(S053,1);
 x = 1:len;
@@ -108,8 +108,8 @@ S053 = S053';
 figure 
 surf(R053,'LineStyle','none')
 
-S081Test = load('../All_FL/FL_Test/USDAS081.csv');
-S081Train = load('../All_FL/FL_Train/USDAS081.csv');
+S081Test = load('../All_IR/IR_Test/USDAS081.csv');
+S081Train = load('../All_IR/IR_Train/USDAS081.csv');
 S081 = vertcat(S081Test,S081Train);
 len = size(S081,1);
 x = 1:len;
@@ -119,8 +119,8 @@ S081 = S081';
 figure 
 surf(R081,'LineStyle','none')
 
-S082Test = load('../All_FL/FL_Test/USDAS082.csv');
-S082Train = load('../All_FL/FL_Train/USDAS082.csv');
+S082Test = load('../All_IR/IR_Test/USDAS082.csv');
+S082Train = load('../All_IR/IR_Train/USDAS082.csv');
 S082 = vertcat(S082Test,S082Train);
 len = size(S082,1);
 x = 1:len;
@@ -130,8 +130,8 @@ S082 = S082';
 figure 
 surf(R082,'LineStyle','none')
 
-S083Test = load('../All_FL/FL_Test/USDAS083.csv');
-S083Train = load('../All_FL/FL_Train/USDAS083.csv');
+S083Test = load('../All_IR/IR_Test/USDAS083.csv');
+S083Train = load('../All_IR/IR_Train/USDAS083.csv');
 S083 = vertcat(S083Test,S083Train);
 len = size(S083,1);
 x = 1:len;
@@ -141,8 +141,8 @@ S083 = S083';
 figure 
 surf(R083,'LineStyle','none')
 
-S089Test = load('../All_FL/FL_Test/USDAS089.csv');
-S089Train = load('../All_FL/FL_Train/USDAS089.csv');
+S089Test = load('../All_IR/IR_Test/USDAS089.csv');
+S089Train = load('../All_IR/IR_Train/USDAS089.csv');
 S089 = vertcat(S089Test,S089Train);
 len = size(S089,1);
 x = 1:len;
@@ -152,8 +152,8 @@ S089 = S089';
 figure 
 surf(R089,'LineStyle','none')
 
-S105Test = load('../All_FL/FL_Test/USDAS105.csv');
-S105Train = load('../All_FL/FL_Train/USDAS105.csv');
+S105Test = load('../All_IR/IR_Test/USDAS105.csv');
+S105Train = load('../All_IR/IR_Train/USDAS105.csv');
 S105 = vertcat(S105Test,S105Train);
 len = size(S105,1);
 x = 1:len;
@@ -163,8 +163,8 @@ S105 = S105';
 figure 
 surf(R105,'LineStyle','none')
 
-S161Test = load('../All_FL/FL_Test/USDAS161.csv');
-S161Train = load('../All_FL/FL_Train/USDAS161.csv');
+S161Test = load('../All_IR/IR_Test/USDAS161.csv');
+S161Train = load('../All_IR/IR_Train/USDAS161.csv');
 S161 = vertcat(S161Test,S161Train);
 len = size(S161,1);
 x = 1:len;
@@ -174,8 +174,8 @@ S161 = S161';
 figure 
 surf(R161,'LineStyle','none')
 
-S209Test = load('../All_FL/FL_Test/USDAS209.csv');
-S209Train = load('../All_FL/FL_Train/USDAS209.csv');
+S209Test = load('../All_IR/IR_Test/USDAS209.csv');
+S209Train = load('../All_IR/IR_Train/USDAS209.csv');
 S209 = vertcat(S209Test,S209Train);
 len = size(S209,1);
 x = 1:len;
@@ -185,8 +185,8 @@ S209 = S209';
 figure 
 surf(R209,'LineStyle','none')
 
-S217Test = load('../All_FL/FL_Test/USDAS217.csv');
-S217Train = load('../All_FL/FL_Train/USDAS217.csv');
+S217Test = load('../All_IR/IR_Test/USDAS217.csv');
+S217Train = load('../All_IR/IR_Train/USDAS217.csv');
 S217 = vertcat(S217Test,S217Train);
 len = size(S217,1);
 x = 1:len;
@@ -196,8 +196,8 @@ S217 = S217';
 figure 
 surf(R217,'LineStyle','none')
 
-S221Test = load('../All_FL/FL_Test/USDAS221.csv');
-S221Train = load('../All_FL/FL_Train/USDAS221.csv');
+S221Test = load('../All_IR/IR_Test/USDAS221.csv');
+S221Train = load('../All_IR/IR_Train/USDAS221.csv');
 S221 = vertcat(S221Test,S221Train);
 len = size(S221,1);
 x = 1:len;
@@ -207,8 +207,8 @@ S221 = S221';
 figure 
 surf(R221,'LineStyle','none')
 
-S253Test = load('../All_FL/FL_Test/USDAS253.csv');
-S253Train = load('../All_FL/FL_Train/USDAS253.csv');
+S253Test = load('../All_IR/IR_Test/USDAS253.csv');
+S253Train = load('../All_IR/IR_Train/USDAS253.csv');
 S253 = vertcat(S253Test,S253Train);
 len = size(S253,1);
 x = 1:len;
@@ -218,8 +218,8 @@ S253 = S253';
 figure 
 surf(R253,'LineStyle','none')
 
-S257Test = load('../All_FL/FL_Test/USDAS257.csv');
-S257Train = load('../All_FL/FL_Train/USDAS257.csv');
+S257Test = load('../All_IR/IR_Test/USDAS257.csv');
+S257Train = load('../All_IR/IR_Train/USDAS257.csv');
 S257 = vertcat(S257Test,S257Train);
 len = size(S257,1);
 x = 1:len;
@@ -229,8 +229,8 @@ S257 = S257';
 figure 
 surf(R257,'LineStyle','none')
 
-S273Test = load('../All_FL/FL_Test/USDAS273.csv');
-S273Train = load('../All_FL/FL_Train/USDAS273.csv');
+S273Test = load('../All_IR/IR_Test/USDAS273.csv');
+S273Train = load('../All_IR/IR_Train/USDAS273.csv');
 S273 = vertcat(S273Test,S273Train);
 len = size(S273,1);
 x = 1:len;

@@ -1,5 +1,5 @@
 %----------------------------------------------------------------------
-% filename: corr_data.m
+% filename: corr_fl_data.m
 % author: rbd
 % date: 7-31-21
 % Description: Experiments with 51 A
@@ -10,7 +10,7 @@
 % Potential Bad :
 % Look nominal:  Figures 5,9,15,20
 % Look mediocre: Figures 7,11,13,14,18:
-% Look poor:
+% Look poor: Figures 6,8,10,12,16,17,19
 %
 %----------------------------------------------------------------------
 close all
