@@ -1,10 +1,11 @@
 % debug
 clc
+close all
 load('../source_tables/tbl_FL.mat');
 
-fish_fillets = {'USDAS257','USDAS258'}; % #50 Poor in Hossein's
 %fish_fillets = {'USDAS156','USDAS153'}; % #9  Very Good in Hossein's   
 %fish_fillets  = {'USDAS082','USDAS072'}; % #22 Marginal in Hossein's
+fish_fillets = {'USDAS257','USDAS258'}; % #50 Poor in Hossein's
 
 I = table2cell(tbl_Fluorescence);
 debug = 1;
