@@ -4,14 +4,14 @@ clc
 close all
 load('../source_tables/tbl_FL.mat');
 
-%fish_fillets = {'USDAS156','USDAS153'}; % #9  Very Good in Hossein's   
+fish_fillets = {'USDAS156','USDAS153'}; % #9  Very Good in Hossein's   
 %fish_fillets  = {'USDAS082','USDAS072'}; % #22 Marginal in Hossein's
 %fish_fillets = {'USDAS257','USDAS258'}; % #50 Poor in Hossein's
 %fish_fillets = {'USDAS257','USDAS259'}; % #50 Poor in Hossein's
 %fish_fillets = {'USDAS257','USDAS260'}; % #50 Poor in Hossein's
 %fish_fillets = {'USDAS258','USDAS259'}; % #50 Poor in Hossein's
 %fish_fillets = {'USDAS258','USDAS260'}; % #50 Poor in Hossein's
-fish_fillets = {'USDAS259','USDAS260'}; % #50 Poor in Hossein's
+%fish_fillets = {'USDAS259','USDAS260'}; % #50 Poor in Hossein's
 
 I = table2cell(tbl_Fluorescence);
 debug = 1;
@@ -56,6 +56,9 @@ m = 1;
    
    I_fillet_1st_matrix = cell2mat(I_fillet_cell_matrix); 
    
+   % normalize
+   I_fillet_1st_matrix_norm = normalize(I_fillet_1st_matrix);
+   
    %I_fillet_single_matrix_group(:,:,m) =  I_fillet_single_matrix;
    
    debug = 1;
@@ -94,6 +97,9 @@ m = 2;
    
    I_fillet_2nd_matrix = cell2mat(I_fillet_cell_matrix); 
    
+   % normalize
+   I_fillet_2nd_matrix_norm = normalize(I_fillet_2nd_matrix);
+   
    %I_fillet_single_matrix_group(:,:,m) =  I_fillet_single_matrix;
    
    debug = 1;
@@ -104,7 +110,7 @@ m = 2;
 debug = 1;
     
 %crr = xcorr2(I_fill(:,:,1) ,I_fill(:,:,2));
-crr   = xcorr2(I_fillet_1st_matrix ,I_fillet_2nd_matrix);
+crr   = xcorr2(I_fillet_1st_matrix_norm ,I_fillet_2nd_matrix_norm);
 %{
 figure 
 surf(xc2,'LineStyle','none')
