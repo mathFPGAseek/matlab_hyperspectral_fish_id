@@ -53,22 +53,25 @@ for m = 1: 2
     % Collect points aroung centroid
     [x_valid,y_valid,err] = collectPoints(x_avg,y_avg,x_loc_mat,y_loc_mat)
     
-    % Form matrix around centroid
+    % Gather indices around centroid
      if err == 0
         [output] = formMatrixCentroid(x_valid,y_valid,x_loc_mat,y_loc_mat);
      else
          disp('Error, Did not get enough valid samples');
      end
      
-     % collect spectra
+     % collect spectra index
      for i = 1 : points
          spectra_index{end+1} = sample_fish{output(i)};
      end
      
+     % collect spectra 
      for j = 1 : points
       temp = spectra_index{j};   
       spectra_values{end+1} = I{temp,10};
      end
+     
+     % Do next ???
              
     debug = 1;
     % Fill-in; Assume 40*40
