@@ -60,6 +60,9 @@ for m = 1: 2
          disp('Error, Did not get enough valid samples');
      end
      
+     
+     debug = 1;
+        
      % collect spectra index
      for i = 1 : points
          spectra_index{end+1} = sample_fish{output(i)};
@@ -71,28 +74,18 @@ for m = 1: 2
       spectra_values{end+1} = I{temp,10};
      end
      
-     % Do next ???
+     debug = 1;
+     
+     spectra_values_mat = double(cell2mat(spectra_values));
+     %collect spectra of two fish to correlate
+     I_sample_spectra(:,m) = spectra_values_mat;
              
     debug = 1;
-    % Fill-in; Assume 40*40
-    %I_fill = zeros(40,40);
-    debug = 1;
-    %tic
-    %{
-    for i = 1 :40
-        for j = 1 :40
-            for k = 1 : loc_len
-                recall_idx = sample_fish{k};
-                if ( (  I{recall_idx,70}  == i ) && (  I{recall_idx,71} == j  )  )
-                    I_fill(i,j,m) = I{recall_idx,10};
-                end
-           
-            end
-        end
-    end
-    %}
-    %toc
-    debug = 1;
+ 
+    % clear for loop
+    spectra_index = {};
+    specra_values = {};
+  
 end % fish fillets
 debug = 1;
 
