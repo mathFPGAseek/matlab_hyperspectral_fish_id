@@ -15,7 +15,7 @@ debug = 1;
 I_fill = zeros(40,40,2);
 
 debug = 1;
-points = 9;
+%points = 9; don't define here
 
 spectra_index = {};
 spectra_values = {};
@@ -51,25 +51,25 @@ for m = 1: 2
     scatter(x_loc_mat,y_loc_mat,'filled')
     
     % Collect points aroung centroid
-    [x_valid,y_valid,err] = collectPoints(x_avg,y_avg,x_loc_mat,y_loc_mat)
+    [x_valid,y_valid] = collectPoints(x_avg,y_avg,x_loc_mat,y_loc_mat)
     
     % Gather indices around centroid
-     if err == 0
-        [output] = formMatrixCentroid(x_valid,y_valid,x_loc_mat,y_loc_mat);
-     else
-         disp('Error, Did not get enough valid samples');
-     end
+     %if err == 0
+        [output,output_count] = formMatrixCentroid(x_valid,y_valid,x_loc_mat,y_loc_mat);
+     %else
+     %    disp('Error, Did not get enough valid samples');
+     %end
      
      
      debug = 1;
         
      % collect spectra index
-     for i = 1 : points
+     for i = 1 : output_count
          spectra_index{end+1} = sample_fish{output(i)};
      end
      
      % collect spectra 
-     for j = 1 : points
+     for j = 1 : output_count
       temp = spectra_index{j};   
       spectra_values{end+1} = I{temp,10};
      end
@@ -78,21 +78,62 @@ for m = 1: 2
      
      spectra_values_mat = double(cell2mat(spectra_values));
      %collect spectra of two fish to correlate
-     I_sample_spectra(:,m) = spectra_values_mat;
+     % hackey way
+     if m == 1
+        I_sample1_spectra(:) = spectra_values_mat;
+     else
+        I_sample2_spectra(:) = spectra_values_mat;
+     end
              
     debug = 1;
  
     % clear for loop
     spectra_index = {};
-    specra_values = {};
+    spectra_values = {};
   
 end % fish fillets
+debug = 1;
+% reshape for correlation
+
+[c,lags] = xcorr(I_sample1_spectra,I_sample2_spectra) % correlate
+debug = 1;
+figure 
+stem(lags,c)
+
 debug = 1;
 
 %--------------------------------------------------------------------------
 %% Funtions
 %--------------------------------------------------------------------------
-function[output_index] = formMatrixCentroid(x_valid,y_valid,x_loc_mat,y_loc_mat)
+function [ output_matrix_1, out_matrix_2] = reshapeMatrix(input_array_1,input_array_2)
+
+    len_1 = size(input_array_1,2);
+    len_2 = size(input_array_2,2);
+
+    min_len = min(len_1,lenn_2);
+
+    switch min_len
+        
+        case 9:15
+            %??? Need to truncate values
+            output_matrix_1 = reshape(input_array_1,[3,3]);
+            output_matrix_2 = reshape(input_array_2,[3,3]);
+ 
+        case 16:24
+            output_matrix_1 = reshape(input_array_1,[4,4]);
+            output_matrix_2 = reshape(input_array_2,[4,4]);
+            
+        otherwise 
+            disp('Error')
+    
+    end
+
+
+
+
+end
+
+function[output_index,output_index_count] = formMatrixCentroid(x_valid,y_valid,x_loc_mat,y_loc_mat)
 
 length = size(x_valid,2);
 valid_index = {};
@@ -121,6 +162,7 @@ valid_index = {};
  end
  valid_index_mat = cell2mat(valid_index);
  output_index = valid_index_mat;
+ output_index_count = size(output_index,2);
  debug = 1;
 end
 
@@ -133,12 +175,15 @@ function[x_avg,y_avg] = calcCentroid(x_loc,y_loc)
 
 end
 
-function[x_valid,y_valid,err] = collectPoints(xavg,yavg,x_loc_mat,y_loc_mat)
+function[x_valid,y_valid] = collectPoints(xavg,yavg,x_loc_mat,y_loc_mat)
    % Decr: This function collects points starting in the 
    % upper left hand corner of a center point and then 
    % creates a 5x5 gird and sweeps across it(grid) trying
    % to collect atleast 9 valid points
-   points_valid = 9;
+   
+   %points_valid = 9; % Don't need grab as many valid as you can in 5x5
+   % Define grid points
+   grid_points = 25;
    length = size(x_loc_mat,2);
    
     xavg_int = round(xavg);
@@ -150,6 +195,7 @@ function[x_valid,y_valid,err] = collectPoints(xavg,yavg,x_loc_mat,y_loc_mat)
     
     x_valid = {};
     y_valid = {};
+    % Define grid
     i_incr = [ -2 -1 0 1 2  ...
                -2 -1 0 1 2  ...
                -2 -1 0 1 2  ...
@@ -166,7 +212,8 @@ function[x_valid,y_valid,err] = collectPoints(xavg,yavg,x_loc_mat,y_loc_mat)
     incr_index = 0;
     k = 0;
     debug_count = 0;
-    while  k < 9
+    %while  k < 9
+    while incr_index < grid_points
           incr_index = incr_index + 1;
           i = i_center + i_incr(incr_index);
           j = j_center + j_incr(incr_index);
@@ -175,10 +222,14 @@ function[x_valid,y_valid,err] = collectPoints(xavg,yavg,x_loc_mat,y_loc_mat)
           index_y = find(j == y_loc_mat);
           x_not_empty = ~(isempty(index_x));
           y_not_empty = ~(isempty(index_y));
+          % debug
+          if (( i == 16) && ( j == 29))
+              debug = 1;
+          end
           if (x_not_empty & y_not_empty)
               x_valid{end+1} = i;
               y_valid{end+1} = j;
-              k = k + 1;
+              %k = k + 1; Don't need
           end
           debug_count = debug_count + 1;
           debug = 1;
@@ -187,12 +238,13 @@ function[x_valid,y_valid,err] = collectPoints(xavg,yavg,x_loc_mat,y_loc_mat)
               
     debug = 1;
     %end
+    %{
     if k < 9
         err = 1;
     else 
         err = 0;
     end
-    
+    %}
     % Given x_valid and y_valid find the corresponding  index that
     % matches x_valid to x_loc_mat and y_valid to y_loc_mat
     % these indexs contain the index of our table that containts
