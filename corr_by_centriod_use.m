@@ -94,8 +94,8 @@ for m = 1: 2
 end % fish fillets
 debug = 1;
 % reshape for correlation
-
-[c,lags] = xcorr(I_sample1_spectra,I_sample2_spectra) % correlate
+I_sample2_spectra_padded
+[c,lags] = xcorr(I_sample1_spectra,I_sample2_spectra,0,'normalized') % correlate
 debug = 1;
 figure 
 stem(lags,c)

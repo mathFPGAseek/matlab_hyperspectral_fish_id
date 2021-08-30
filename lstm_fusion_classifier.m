@@ -16,7 +16,8 @@ function [done,total_accuracy,ConfusMat] = lstm_fusion_classifier(mode,rand_seed
                                            ,num_random_train_vectors_per_fish ...
                                            ,num_random_test_vectors_per_fish )
 done = 0;
-
+% For debug
+count_debug_adj = 0;
 
 %num_random_train_vectors_per_fish = 40;
 size_of_random_train_vectors      = 100;
@@ -244,8 +245,17 @@ end % debug skip train
                  random_ir = data_ir(randperm(size(data_ir, 1)), :);
                  rng(rng_index);
                  random_vs = data_vs(randperm(size(data_vs, 1)), :);
+                 % check array size before loop
+                 [size_of_random_test_vectors_adj ]  = checkMinSizeArrays(size_of_random_test_vectors,...
+                            random_fl,random_ir,random_vs)
+                 % debug
+                 if size_of_random_test_vectors_adj == size_of_random_test_vectors
+                     debug_null = 0;
+                 else
+                     count_debug_adj = count_debug_adj + 1;
+                 end
                  % Build vector for this randomization
-                 for i1 = 1 : size_of_random_test_vectors
+                 for i1 = 1 : size_of_random_test_vectors_adj
                    random_temp_array_fl = random_fl(i1,:);
                    random_temp_array_ir = random_ir(i1,:);
                    random_temp_array_vs = random_vs(i1,:);
@@ -312,6 +322,19 @@ debug = 1;
 %%--------------------------------------
 %% Functions
 %%--------------------------------------
+ function[ min_out ]  = checkMinSizeArrays(size_of_random_test_vectors,...
+                            random_fl,random_ir,random_vs)
+ 
+sz_fl = size(random_fl,1);
+sz_ir = size(random_ir,1);
+sz_vs = size(random_vs,1);
+
+vec_sizes = [size_of_random_test_vectors sz_fl sz_ir sz_vs];
+
+min_out = min(vec_sizes);
+                           
+end
+                                
 function save_wt_data(cell_fish_train_directory,WtVector,mode)
     
    substring1 = cell_fish_train_directory{mode};

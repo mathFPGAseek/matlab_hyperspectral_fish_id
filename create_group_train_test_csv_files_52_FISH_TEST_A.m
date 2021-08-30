@@ -140,7 +140,7 @@ disp('Done with IR  Train Processing');
 % Train FL Load Table
 %----------------------
 load('../source_tables/tbl_FL.mat');
-T                         = tbl_Fluorescence;
+T                         = tbl_FL;
 dir_data_file             =  '../All_FL/FL_Train';
 dir_loc_file              =  '../All_FL/FL_Loc_Train';
 dir_count_file            =  '../All_FL';
@@ -213,7 +213,7 @@ debug = 1;
 % Test FL Load Table
 %----------------------
 load('../source_tables/tbl_FL.mat');
-T                         = tbl_Fluorescence;
+T                         = tbl_FL;
 dir_data_file             =  '../All_FL/FL_Test';
 dir_loc_file              =  '../All_FL/FL_Loc_Test';
 dir_count_file            =  '../All_FL';
